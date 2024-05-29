@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "mf50"
+version = "0.1.0"
+description = ""
+authors = ["bensteinberg <bsteinberg@law.harvard.edu>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+camelot-py = "^0.11.0"
+opencv-python = "^4.9.0.80"
+ghostscript = "^0.7"
+click = "^8.1.7"
+requests = "^2.32.3"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.0.0"
+black = "^24.4.2"
+
+[tool.poetry.scripts]
+doit = 'mf50.cli:doit'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
