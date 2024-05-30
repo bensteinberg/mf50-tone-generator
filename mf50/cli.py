@@ -24,27 +24,17 @@ from pathlib import Path
 )
 def doit(pdf, sequence, source):
     """This program translates between the sequencing syntax of the Byonics MicroFox 50 and TidalCycles notes."""
-    notes = get_notes(pdf)
+    fox2tidal, tidal2fox = get_note_dicts(pdf)
 
-    def transl(fr, to, val, d=notes):
-        """Translates val in d from fr key to to key"""
-        return [n[to] for n in d if n[fr] == val][0]
+    try:
+        if source == "fox":
+            click.echo(" ".join([fox2tidal[char] for char in list(sequence)]))
+        elif source == "tidal":
+            click.echo("".join([tidal2fox[note] for note in sequence.split()]))
+    except KeyError:
+        raise click.ClickException(f"That does not appear to be a {source} sequence.")
 
-    def tidalize(sequence):
-        return " ".join([transl("char", "tidal", char) for char in list(sequence)])
-
-    def foxize(sequence):
-        return "".join([transl("tidal", "char", note) for note in sequence.split()])
-
-    if source == "fox":
-        f = tidalize
-    elif source == "tidal":
-        f = foxize
-
-    click.echo(f(sequence))
-
-
-def get_notes(pdf, base_url="https://byonics.com/downloads"):
+def get_note_dicts(pdf, base_url="https://byonics.com/downloads"):
     """Cache the notes in a pickle."""
     pkl = Path(f"{pdf}.pkl")
 
@@ -80,4 +70,7 @@ def get_notes(pdf, base_url="https://byonics.com/downloads"):
         with open(pkl, "wb") as f:
             pickle.dump(notes, f)
 
-    return notes
+    fox2tidal = {n["char"]: n["tidal"] for n in notes}
+    tidal2fox = {n["tidal"]: n["char"] for n in notes}
+
+    return fox2tidal, tidal2fox
