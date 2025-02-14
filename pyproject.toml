@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mf50"
-version = "0.1.1"
+version = "0.1.2"
 description = ""
 authors = ["bensteinberg <bsteinberg@law.harvard.edu>"]
 readme = "README.md"
