@@ -9,7 +9,7 @@ from pathlib import Path
 @click.command()
 @click.option(
     "--pdf",
-    default="MicroFox-50_Manual_v0.2.pdf",
+    default="MicroFox-50_Manual_v0.3.pdf",
     help="The source of the MicroFox 50 tone codes",
 )
 @click.option(
