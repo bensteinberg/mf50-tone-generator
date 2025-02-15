@@ -1,22 +1,28 @@
-[tool.poetry]
-package-mode = false
+[project]
+name = "mf50-tone-generator"
+version = "0.0.1"
+requires-python = "~=3.11"
+dependencies = [
+    "camelot-py>=0.11.0,<0.12",
+    "opencv-python>=4.9.0.80,<5",
+    "ghostscript>=0.7,<0.8",
+    "click>=8.1.7,<9",
+    "requests>=2.32.3,<3",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-camelot-py = "^0.11.0"
-opencv-python = "^4.9.0.80"
-ghostscript = "^0.7"
-click = "^8.1.7"
-requests = "^2.32.3"
+[project.scripts]
+doit = "mf50.cli:doit"
 
-[tool.poetry.group.dev.dependencies]
-flake8 = "^7.0.0"
-black = "^24.4.2"
-pytest = "^8.2.1"
+[dependency-groups]
+dev = [
+    "flake8>=7.0.0,<8",
+    "black>=24.4.2,<25",
+    "pytest>=8.2.1,<9",
+]
 
-[tool.poetry.scripts]
-doit = 'mf50.cli:doit'
+[tool.uv]
+package = false
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
