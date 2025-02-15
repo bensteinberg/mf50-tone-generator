@@ -1,10 +1,5 @@
 [tool.poetry]
-name = "mf50"
-version = "0.1.2"
-description = ""
-authors = ["bensteinberg <bsteinberg@law.harvard.edu>"]
-readme = "README.md"
-license = "GPL-3.0-or-later"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
